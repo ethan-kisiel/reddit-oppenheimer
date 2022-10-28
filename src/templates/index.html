@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Reddit Oppenheimer</title>
+    </head>
+    <body>
+        <div id="main-div">
+            <h1>"Now I am become death, the destroyer of posts and comments"</h1>
+            <br>
+            <div id="form-div">
+                <form action="server.submit_credentials()">
+                    <label for="username">Username:</label><br>
+                    <input class="text-field" type="text" id="username" name="username" value=""><br>
+                    <label for="password">Password:</label><br>
+                    <input class="text-field" type="password" id="password" name="password" value="">
+                    {% if not error.empty%}
+                        <p id="error-message">{{ error }}</p>
+                    {% endif %}
+                    <br><br>
+                    <div id="button-div">
+                        <input id="submit-button" type="submit" value="Submit">
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </body>
+</html>
+
+<style>
+    #error-message
+    {
+        color:crimson;
+        font-size: 75%;
+    }
+    #main-div
+    {
+        margin: auto;
+        width: 50%
+    }
+    #form-div
+    {
+        margin: auto;
+        width: 50%;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+    #submit-button
+    {
+        padding-left: 25%;
+        padding-right: 25%;
+    }
+    #submit-button
+    {
+        width: 75%;
+    }
+    .text-field
+    {
+        width: 75%;
+    }
+</style>
