@@ -1,5 +1,6 @@
-from flask import Flask, render_template, url_for, request
-
+from flask import Flask, render_template, redirect, request
+import asyncio
+from terminator import Arnold
 error = ""
 app = Flask(__name__)
         
@@ -9,7 +10,8 @@ def index():
         username = request.form['username']
         password = request.form['password']
         # deletion will happen here
-        return f"{username}, {password}"
+        asyncio.run(Arnold.commence_deletion(username=username, password=password))
+        return redirect(f'https://www.reddit.com/user/{username}')
     else:
         return render_template('index.html', error=error)
 
