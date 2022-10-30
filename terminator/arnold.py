@@ -36,7 +36,7 @@ class Arnold:
                 return "Couldn't delete comments."
             try:
                 # get all redditor posts
-                posts = await redditor.submissions.new(limit=None)
+                posts = redditor.submissions.new(limit=None)
                 async for post in posts:
                     await post.delete()
             except Exception as e:
