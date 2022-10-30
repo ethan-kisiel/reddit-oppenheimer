@@ -1,30 +1,39 @@
-from praw import Reddit
-from os import environ
-from .environment_vars import *
+from asyncpraw import Reddit
+from asyncpraw.exceptions import *
 
-CLIENT_ID = environ.get('CLIENT_ID')
-CLIENT_SECRET = environ.get('CLIENT_SECRET')
-USER_AGENT = environ.get('USER_AGENT')
+USER_AGENT = '<web:OPPENHEIMER:1.0>'
 
 class Arnold:
     '''
     houses the delete function for
     removing user comments and posts
     '''
-    async def commence_deletion(username: str, password: str):
-        args = {'client_id': CLIENT_ID,
-                'client_secret': CLIENT_SECRET,
-                'user_agent': USER_AGENT,
-                'username': username,
-                'password': password}
-
-        with Reddit(client_id=CLIENT_ID,
-                    client_secret=CLIENT_SECRET,
-                    user_agent=USER_AGENT,
-                    username=username,
-                    password=password) as reddit:
-            redditor = reddit.user.me()
-            for comment in redditor.comments.new(limit=None):
-                comment.delete()
-            for post in redditor.submissions.new(limit=None):
-                post.delete()
+    async def commence_deletion(
+            client_id: str,
+            client_secret: str,
+            username: str, password: str):
+        
+        with Reddit(
+                client_id=client_id,
+                client_secret=client_secret,
+                user_agent=USER_AGENT,
+                username=username,
+                password=password) as reddit:
+            
+            try:
+                redditor = await reddit.user.me()
+            except Exception as e:
+                return "Couldn't instantiate user."
+            try:
+                async for comment in redditor.comments.new(limit=None):
+                    await comment.delete()
+            except Exception as e:
+                print(e)
+                return "Couldn't delete comments."
+            try:
+                async for post in redditor.submissions.new(limit=None):
+                    await post.delete()
+            except Exception as e:
+                print(e)
+                return "Couldn't delete posts."
+            return None
