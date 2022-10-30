@@ -4,12 +4,18 @@ from terminator import Arnold
 
 error = ""
 
-app = Flask(__name__)
 def validate_fields(args: [str]) -> bool:
     for element in args:
         if not element:
             return False
     return True
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'test super secret'
+
+@app.route("/help")
+def help():
+    return render_template('help.html')
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
@@ -49,4 +55,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0")
