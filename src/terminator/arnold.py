@@ -23,15 +23,21 @@ class Arnold:
             try:
                 redditor = await reddit.user.me()
             except Exception as e:
+                print(e)
                 return "Couldn't instantiate user."
             try:
-                async for comment in redditor.comments.new(limit=None):
+                # get user comments and unwrap MoreComments object
+                comments = await redditor.comments.new(limit=None)
+                await comments.replace_more(limit=None)
+                async for comment in comments:
                     await comment.delete()
             except Exception as e:
                 print(e)
                 return "Couldn't delete comments."
             try:
-                async for post in redditor.submissions.new(limit=None):
+                # get all redditor posts
+                posts = await redditor.submissions.new(limit=None)
+                async for post in posts:
                     await post.delete()
             except Exception as e:
                 print(e)
