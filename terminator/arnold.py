@@ -27,8 +27,8 @@ class Arnold:
                 return "Couldn't instantiate user."
             try:
                 # get user comments and unwrap MoreComments object
-                comments = await redditor.comments.new(limit=None)
-                comments.replace_more(limit=None)
+                comments = redditor.comments.new(limit=None)
+                #await comments.replace_more(limit=None)
                 async for comment in comments:
                     await comment.delete()
             except Exception as e:
