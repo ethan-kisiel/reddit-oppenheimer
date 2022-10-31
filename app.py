@@ -2,7 +2,10 @@ from flask import Flask, render_template, redirect, request
 import asyncio
 from terminator import Arnold
 from os.path import join as join_path
-error = ""
+from os import environ as env
+
+SECRET_KEY = env.get('SECRET_KEY')
+print(SECRET_KEY)
 IMAGES_FOLDER = join_path('static', 'imgs')
 
 def validate_fields(args: list[str]) -> bool:
@@ -12,7 +15,7 @@ def validate_fields(args: list[str]) -> bool:
     return True
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'test super secret'
+app.config['SECRET_KEY'] = SECRET_KEY
 app.config['IMG_FOLDER'] = IMAGES_FOLDER
 
 @app.route("/help")
@@ -20,6 +23,7 @@ def help():
     image_one_url = join_path(app.config['IMG_FOLDER'], 'step_one.png')
     image_two_url = join_path(app.config['IMG_FOLDER'], 'step_two.png')
     image_three_url = join_path(app.config['IMG_FOLDER'], 'step_three.png')
+
     return render_template('help.html', image_one_url=image_one_url,
                                 image_two_url=image_two_url,
                                 image_three_url=image_three_url)
