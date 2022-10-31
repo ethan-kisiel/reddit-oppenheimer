@@ -5,7 +5,7 @@ from os.path import join as join_path
 from os import environ as env
 
 SECRET_KEY = env.get('SECRET_KEY')
-print(SECRET_KEY)
+print(f'SECRET SECRET SECRET KEY: ->> {SECRET_KEY}')
 IMAGES_FOLDER = join_path('static', 'imgs')
 
 def validate_fields(args: list[str]) -> bool:
