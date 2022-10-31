@@ -12,7 +12,7 @@ class Arnold:
             client_id: str,
             client_secret: str,
             username: str, password: str):
-        
+
         with Reddit(
                 client_id=client_id,
                 client_secret=client_secret,
@@ -25,18 +25,23 @@ class Arnold:
             except Exception as e:
                 print(e)
                 return "Couldn't instantiate user."
+
             try:
                 # get user comments and unwrap MoreComments object
                 comments = redditor.comments.new(limit=None)
                 #await comments.replace_more(limit=None)
+                
+                #Should this be an async for loop?
                 async for comment in comments:
                     await comment.delete()
             except Exception as e:
                 print(e)
                 return "Couldn't delete comments."
+
             try:
                 # get all redditor posts
                 posts = redditor.submissions.new(limit=None)
+                # Shold this be an async for loop?
                 async for post in posts:
                     await post.delete()
             except Exception as e:
