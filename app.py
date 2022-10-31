@@ -1,10 +1,11 @@
 from flask import Flask, render_template, redirect, request
 import asyncio
 from terminator import Arnold
-
+from os.path import join as join_path
 error = ""
+IMAGES_FOLDER = join_path('static', 'imgs')
 
-def validate_fields(args: [str]) -> bool:
+def validate_fields(args: list[str]) -> bool:
     for element in args:
         if not element:
             return False
@@ -12,10 +13,16 @@ def validate_fields(args: [str]) -> bool:
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'test super secret'
+app.config['IMG_FOLDER'] = IMAGES_FOLDER
 
 @app.route("/help")
 def help():
-    return render_template('help.html')
+    image_one_url = join_path(app.config['IMG_FOLDER'], 'step_one.png')
+    image_two_url = join_path(app.config['IMG_FOLDER'], 'step_two.png')
+    image_three_url = join_path(app.config['IMG_FOLDER'], 'step_three.png')
+    return render_template('help.html', image_one_url=image_one_url,
+                                image_two_url=image_two_url,
+                                image_three_url=image_three_url)
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
@@ -55,4 +62,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", debug=True)

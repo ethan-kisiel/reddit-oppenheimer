@@ -7,7 +7,36 @@
             <input id="back-button" type="submit" value="Back">
         </form>
         <div id="main-div">
-            <a href="https://www.reddit.com/prefs/apps">apps page</a>
+            <p>In order to use this app, you must first generate an app that can access the reddit api through your account.
+            To do so, follow this link: <a id="apps-page" href="https://www.reddit.com/prefs/apps" target="_blank" rel="noopener noreferrer">apps page</a>.
+            </p>
+            <p>Scroll to the bottom of this page and click the button that says:
+            "create another app..."
+            </p>
+            <div class="image-div">
+                <img class="image" src="{{ image_one_url }}">
+            </div>
+            <br><br><br>
+            <p>Then, type anything into the "name" field, select the "script" option from
+            the radio buttons, and put any url into the "redirect uri" field and press the
+            the "create app" button.
+            </p>
+            <div class="image-div">
+                <img class="image" src="{{ image_two_url }}">
+            </div>
+            <br><br><br>
+            <p>You will now be able to retrieve the ClientID and Client Key that is requried
+            to delete your posts and comments on the main page.
+            </p>
+            <div class="image-div">
+                <img class="image" src="{{ image_three_url }}">
+            </div>
+            <p>Copy and paste the Client ID to the "ClientID" field on the main page;
+            copy and paste the Secret to the "Client Secret" field on the main page.
+            Now you can just enter your username and password and press submit.
+            The deletion process may take a while, but after it is complete, it will
+            redirect you to your profile page.
+            </p>
         </div>
     </body>
 </html>
@@ -18,11 +47,28 @@
         background-color: rgb(14, 14, 14);
         color: antiquewhite;
     }
+    #main-div
+    {
+        margin: auto;
+        width: 50%;
+    }
     #back-button
     {
         text-decoration-line: underline;
         background-color: rgb(14, 14, 14);
         color: antiquewhite;
         border-style: none;
+        font-size: 100%;
     }
+    #apps-page
+    {
+        color: antiquewhite;
+    }
+
+    .image
+    {
+        height: 55%;
+        width: 100%
+    }
+
 </style>
