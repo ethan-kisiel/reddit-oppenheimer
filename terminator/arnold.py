@@ -20,7 +20,7 @@ class Arnold:
                 # if there is no threshold, comment is deleted
                 # else delete only if comment score is below threshold
                 
-                if threshold is not None:
+                if threshold is None:
                     await comment.delete()
                 elif comment.score < threshold:
                     await comment.delete()
@@ -35,7 +35,7 @@ class Arnold:
             posts = redditor.submissions.new(limit=None)
             # Shold this be an async for loop?
             async for post in posts:
-                if threshold is not None:
+                if threshold is None:
                     await post.delete()
                 elif post.score < threshold:
                     await post.delete()
@@ -51,6 +51,7 @@ class Arnold:
 
         if threshold is not None:
             threshold = int(threshold)
+            print(f"THRESHOLD: {threshold}")
 
         reddit = Reddit(client_id=client_id,
                         client_secret=client_secret,
@@ -71,7 +72,7 @@ class Arnold:
         posts_result = await Arnold.delete_posts(redditor, threshold)
         if posts_result:
             return posts_result
-        
+
         try:
             await reddit.close()
         except Exception as e:
