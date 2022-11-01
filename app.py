@@ -35,7 +35,8 @@ def index():
         client_secret = request.form['secret']
         username = request.form['username']
         password = request.form['password']
-
+        threshold = request.form['karma-threshold']
+        
         valid_args = validate_fields([
                 client_id,
                 client_secret,
@@ -48,7 +49,8 @@ def index():
                     client_id=client_id,
                     client_secret=client_secret,
                     username=username,
-                    password=password))
+                    password=password,
+                    threshold = threshold if threshold else None))
 
             if result is not None:
                 # an error occured in Arnold.commence_deletion

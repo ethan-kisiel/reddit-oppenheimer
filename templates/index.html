@@ -27,19 +27,27 @@
 
                     <label for="password">Password:</label><br>
                     <input class="text-field" type="text" id="password" name="password" value="">
-
                     {% if not error.empty%}
-                        <p id="error-message">{{ error }}</p>
+                    <p id="error-message">{{ error }}</p>
                     {% endif %}
+                    <br><br>
+
+                    <label for="karma-threshold">Precision Strike (karma threshold - removes anything below this number):</label>
+                    <p>leave blank to remove everything</p>
+                    <input type="number" id="karma-threshold" name="karma-threshold" min="-1" max="100">
+                    
                     <br><br>
                     <div id="button-div">
                         <input id="submit-button" type="submit" value="Submit">
                     </div>
                 </form> 
+                <br><br>
+                <p>
+                Did you find this webapp useful? If so, please consider buying me a 
+                <a id="kofi-link" href="https://ko-fi.com/ethankisiel">Ko-fi</a>.
+                (donations will help me keep the site up and running.)
+                </p>
             </div>
-        </div>
-        <div id="link-div">
-            <a href="https://github.com/ethan-kisiel/reddit-oppenheimer">View project on Github</a>
         </div>
     </body>
 </html>
@@ -104,8 +112,16 @@
         border-radius: 1px;
         border-style: none;
     }
-    #link-div
+    #karma-threshold
     {
-        margin-top: 30%;
+        border-style: none;
+        background-color: rgb(66, 66, 66);
+        color: antiquewhite;
+    }
+    #kofi-link
+    {
+        text-decoration: underline;
+        font-weight: bold;
+        color: antiquewhite;
     }
 </style>
