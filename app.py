@@ -36,7 +36,8 @@ def index():
         username = request.form['username']
         password = request.form['password']
         threshold = request.form['karma-threshold']
-        
+        deletion_type = request.form['cpb-radio']
+
         valid_args = validate_fields([
                 client_id,
                 client_secret,
@@ -50,6 +51,7 @@ def index():
                     client_secret=client_secret,
                     username=username,
                     password=password,
+                    deletion_type=deletion_type,
                     threshold = threshold if threshold else None))
 
             if result is not None:
@@ -64,8 +66,6 @@ def index():
             return render_template('index.html', error=error)
     else:
         return render_template('index.html', error="")
-
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")

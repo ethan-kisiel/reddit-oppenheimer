@@ -30,22 +30,28 @@
                     {% if not error.empty%}
                     <p id="error-message">{{ error }}</p>
                     {% endif %}
-                    <br><br>
+                    <br>
 
                     <label for="karma-threshold">Precision Strike (karma threshold - removes anything below this number):</label>
                     <p>leave blank to remove everything</p>
                     <input type="number" id="karma-threshold" name="karma-threshold" min="-1" max="100">
-                    
+
+                    <p>Choose to delete only comments, only posts, or both</p>
+                    <input type="radio" id="radio-both" name="cpb-radio" value="BOTH" checked>
+                    <label for="readio-both">Both</label> 
+                    <input type="radio" id="radio-comments" name="cpb-radio" value="COMMENTS">
+                    <label for="readio-comments">Comments</label> 
+                    <input type="radio" id="radio-posts" name="cpb-radio" value="POSTS">
+                    <label for="readio-posts">Posts</label> 
                     <br><br>
                     <div id="button-div">
                         <input id="submit-button" type="submit" value="Submit">
                     </div>
-                </form> 
-                <br><br>
+                </form>
                 <p>
                 Did you find this webapp useful? If so, please consider buying me a 
                 <a id="kofi-link" href="https://ko-fi.com/ethankisiel">Ko-fi</a>.
-                (donations will help me keep the site up and running.)
+                (donations will allow me keep the site up and running.)
                 </p>
             </div>
         </div>

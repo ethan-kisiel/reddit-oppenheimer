@@ -47,7 +47,8 @@ class Arnold:
                                 client_secret: str,
                                 username: str,
                                 password: str,
-                                threshold = None):
+                                deletion_type: str,
+                                threshold: int=None):
 
         if threshold is not None:
             threshold = int(threshold)
@@ -64,14 +65,31 @@ class Arnold:
         except Exception as e:
             print(e)
             return "Couldn't instantiate user."
-        
-        comments_result = await Arnold.delete_comments(redditor, threshold)
-        if comments_result:
-            return comments_result
 
-        posts_result = await Arnold.delete_posts(redditor, threshold)
-        if posts_result:
-            return posts_result
+        match deletion_type:
+            case "BOTH":
+                print(deletion_type)
+                comments_result = await Arnold.delete_comments(redditor, threshold)
+                if comments_result:
+                    return comments_result
+
+                posts_result = await Arnold.delete_posts(redditor, threshold)
+                if posts_result:
+                    return posts_result
+
+            case "COMMENTS":
+                print(deletion_type)
+                comments_result = await Arnold.delete_comments(redditor, threshold)
+                if comments_result:
+                    return comments_result
+
+            case "POSTS":
+                print(deletion_type)
+                posts_result = await Arnold.delete_posts(redditor, threshold)
+                if posts_result:
+                    return posts_result
+            
+
 
         try:
             await reddit.close()
