@@ -4,8 +4,8 @@ from terminator import Arnold
 from os.path import join as join_path
 from os import environ as env
 
-SECRET_KEY = env.get('SECRET_KEY')
-print(f'SECRET SECRET SECRET KEY: ->> {SECRET_KEY}')
+#SECRET_KEY = env.get('SECRET_KEY')
+#print(f'SECRET SECRET SECRET KEY: ->> {SECRET_KEY}')
 IMAGES_FOLDER = join_path('static', 'imgs')
 
 def validate_fields(args: list[str]) -> bool:
@@ -15,7 +15,7 @@ def validate_fields(args: list[str]) -> bool:
     return True
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = SECRET_KEY
+#app.config['SECRET_KEY'] = SECRET_KEY
 app.config['IMG_FOLDER'] = IMAGES_FOLDER
 
 @app.route("/help")
